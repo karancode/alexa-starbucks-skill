@@ -87,3 +87,45 @@ const ErrorHandler = {
     }
 };
 
+let skill;
+
+exports.handler = async function (event, context) {
+    console.log(`REQUEST++++${JSON.stringify(event)}`);
+
+    if(!skill){
+        skill = Alexa.SkillBuilders.custom()
+            .addRequestHandlers(
+                LauchRequestHandler,
+                HelloWorldIntentHandler,
+                HelpIntentHandler,
+                CancelAndStopIntentHandler,
+                SessionEndedRequestHandler
+            )
+            .addErrorHandlers(
+                ErrorHandler
+            )
+            .create();
+    }
+
+    const response = await skill.invoke(event, context);
+    console.log(`RESPONSE++++${JSON.stringify(response)}`);
+
+    return response;
+};
+
+//for AWS Lambda
+/*
+ exports.handler = Alexa.SkillBuilders.custom()
+    .addRequestHandlers(
+        LauchRequestHandler,
+        HelloWorldIntentHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler
+    )
+    .addErrorHandlers(
+        ErrorHandler
+    )
+    .lambda();
+*/
+
