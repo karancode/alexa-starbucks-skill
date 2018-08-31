@@ -12,7 +12,7 @@ const LauchRequestHandler = {
             .speak(speechText)
             .reprompt(speechText)
             .withSimpleCard('Hello World', speechText)
-            .getRespone();
+            .getResponse();
     }
 };
 
@@ -27,7 +27,7 @@ const HelloWorldIntentHandler = {
         return handlerInput.responseBuilder
             .speak(speechText)
             .withSimpleCard('Hello World', speechText)
-            .getRespone();
+            .getResponse();
     }
 };
 
@@ -43,7 +43,7 @@ const HelpIntentHandler = {
             .speak(speechText)
             .reprompt(speechText)
             .withSimpleCard('Hello World', speechText)
-            .getRespone();
+            .getResponse();
     }
 };
 
@@ -59,17 +59,17 @@ const CancelAndStopIntentHandler = {
         return handlerInput.responseBuilder
             .speak(speechText)
             .withSimpleCard('Hello World', speechText)
-            .getRespone();
+            .getResponse();
     }
 };
 
 const SessionEndedRequestHandler = {
     canHandle(handlerInput) {
-        return handler.requestEnvelope.request.type === 'SessionEndedRequest';
+        return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
     },
     handle(handlerInput) {
         //cleanup logic
-        return handlerInput.responseBuilder.getRespone();
+        return handlerInput.responseBuilder.getResponse();
     }
 };
 
@@ -83,7 +83,7 @@ const ErrorHandler = {
         return handlerInput.responseBuilder
             .speak('Sorry, I can\'t understand the command. Please say again.')
             .reprompt('Sorry, I can\'t understand the command. Please say again.')
-            .getRespone();
+            .getResponse();
     }
 };
 
