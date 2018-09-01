@@ -1,6 +1,9 @@
 //index.js
 const Alexa = require('ask-sdk-core');
 
+
+
+
 const LauchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
@@ -22,7 +25,8 @@ const HelloWorldIntentHandler = {
         && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntentHandler';
     },
     handle(handlerInput) {
-        const speechText = 'Hello World!';
+        const speechText = 'Hello world';
+        console.log("actaul array->: ", magicSpells[getRandom(magicSpells.length)])
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -86,6 +90,21 @@ const ErrorHandler = {
             .getResponse();
     }
 };
+
+
+// constants
+const magicSpells = [
+    'Order One',
+    'Order Two',
+    'Order Three',
+    'Order Four',
+    'Order Five'
+];
+
+function getRandom(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+}
+
 
 let skill;
 
