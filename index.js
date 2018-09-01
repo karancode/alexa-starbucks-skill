@@ -2,8 +2,6 @@
 const Alexa = require('ask-sdk-core');
 
 
-
-
 const LauchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
@@ -22,11 +20,10 @@ const LauchRequestHandler = {
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntentHandler';
+        && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
     },
     handle(handlerInput) {
-        const speechText = 'Hello world';
-        console.log("actaul array->: ", magicSpells[getRandom(magicSpells.length)])
+        const speechText = magicSpells[getRandom(magicSpells.length)];
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -58,7 +55,7 @@ const CancelAndStopIntentHandler = {
             || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = 'Goodbye!'
+        const speechText = 'Goodbye!';
 
         return handlerInput.responseBuilder
             .speak(speechText)
