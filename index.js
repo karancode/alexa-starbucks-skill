@@ -32,6 +32,43 @@ const HelloWorldIntentHandler = {
     }
 };
 
+const MagicSpellInitHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && (handlerInput.requestEnvelope.request.type === 'MagicSpellInitIntent'
+            || handlerInput.requestEnvelope.request.type === 'AMAZON.YesIntent' 
+            || handlerInput.requestEnvelope.request.type === 'AMAZON.StartOverIntent');
+    },
+    handle(handlerInput) {
+        const speechText = 'Hello. Please tell me what kind of drink are you craving for now? ';
+
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+
+const GetChoicesForSpellHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.type === 'GetChoicesForSpellIntent';
+    },
+    handle(handlerInput) {
+        const attributes = handlerInput.attributesManager.getSessionAttributes();
+        const choiceSlot = handlerInput.requestEnvelope.request.intent.slots.choice.value;
+        const spell = getSpell(handlerInput, choiceSlot);
+
+    }
+
+}
+
+function getSpell(handlerInput, choiceSlot) {
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+
+    //if()
+}
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
