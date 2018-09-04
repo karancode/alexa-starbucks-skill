@@ -1,33 +1,25 @@
 //index.js
 const Alexa = require('ask-sdk-core');
 
+// constants
+const WELCOME_MESSAGE = 'Welcome to Alexa Starbucks Magic Spell.\
+        I can suggest some crazy starbucks magic spells!\
+        You can ask me for some Magic Spell!';
+const HELP_MESSAGE = 'Hello! I am Alexa for Starbucks Magic Spell. \
+        I can recommend you some crazy orders known as Starbucks Magic Spells!\
+        You inovke by saying... Suggest me something or Tell me a Magic Spell!';
+const GOODBYE_TEXT = 'Have a nice drink. Goodbye!'
 
 const LauchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speechText = 'Welcome to Alexa Starbucks Magic Spell Skill!';
+        const speechText = WELCOME_MESSAGE;
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('Hello World', speechText)
-            .getResponse();
-    }
-};
-
-const HelloWorldIntentHandler = {
-    canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.intent.name === 'HelloWorldIntent';
-    },
-    handle(handlerInput) {
-        const speechText = magicSpells[getRandom(magicSpells.length)];
-
-        return handlerInput.responseBuilder
-            .speak(speechText)
-            .withSimpleCard('Hello World', speechText)
             .getResponse();
     }
 };
@@ -75,12 +67,11 @@ const HelpIntentHandler = {
         && handlerInput.requestEnvelope.request.intent.name ==='AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speechText = 'You can say hello to me';
+        const speechText = HELP_MESSAGE;
 
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
-            .withSimpleCard('Hello World', speechText)
             .getResponse();
     }
 };
@@ -92,11 +83,10 @@ const CancelAndStopIntentHandler = {
             || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = 'Goodbye!';
+        const speechText = GOODBYE_TEXT;
 
         return handlerInput.responseBuilder
             .speak(speechText)
-            .withSimpleCard('Hello World', speechText)
             .getResponse();
     }
 };
@@ -149,7 +139,6 @@ exports.handler = async function (event, context) {
         skill = Alexa.SkillBuilders.custom()
             .addRequestHandlers(
                 LauchRequestHandler,
-                HelloWorldIntentHandler,
                 HelpIntentHandler,
                 CancelAndStopIntentHandler,
                 SessionEndedRequestHandler,
