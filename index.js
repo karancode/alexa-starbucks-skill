@@ -30,9 +30,9 @@ const LauchRequestHandler = {
 const MagicSpellInitHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && (handlerInput.requestEnvelope.request.type === 'MagicSpellInitIntent'
-            || handlerInput.requestEnvelope.request.type === 'AMAZON.YesIntent' 
-            || handlerInput.requestEnvelope.request.type === 'AMAZON.StartOverIntent');
+        && (handlerInput.requestEnvelope.request.intent.name === 'MagicSpellInitIntent'
+            || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.YesIntent' 
+            || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StartOverIntent');
     },
     handle(handlerInput) {
         const speechText = MAGICSPELL_INIT_MESSAGE;
@@ -47,16 +47,16 @@ const MagicSpellInitHandler = {
 const GetTypeIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.type === 'GetTypeIntent';
+        && handlerInput.requestEnvelope.request.intent.name === 'GetTypeIntent';
     },
     handle(handlerInput) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
-        const drink_type = handlerInput.requestEnvelope.request.slots.drink_type.value;
+        const drink_type = handlerInput.requestEnvelope.request.intent.slots.drink_type.value;
         attributes.drink_type = drink_type;
         handlerInput.attributesManager.setSessionAttributes(attributes);
 
         const speechText = MAGICSPELL_PREF_MESSAGE;
-        return handlerInput.response
+        return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
@@ -66,16 +66,16 @@ const GetTypeIntentHandler = {
 const GetPrefIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.type === 'GetPrefIntent';
+        && handlerInput.requestEnvelope.request.intent.name === 'GetPrefIntent';
     },
-    handler(handlerInput) {
+    handle(handlerInput) {
         //const attributes = handlerInput.attributesManager.getSessionAttributes();
-        const pref_type = handlerInput.requestEnvelope.request.slots.pref_type.value;
+        const pref_type = handlerInput.requestEnvelope.request.intent.slots.pref_type.value;
         //attributes.pref_type = pref_type;
         //handlerInput.attributesManager.setSessionAttributes(attributes);
-
+    
         const speechText = getMagicSpell(pref_type, handlerInput);
-        return handlerInput.response
+        return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
