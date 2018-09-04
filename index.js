@@ -152,7 +152,9 @@ exports.handler = async function (event, context) {
                 HelloWorldIntentHandler,
                 HelpIntentHandler,
                 CancelAndStopIntentHandler,
-                SessionEndedRequestHandler
+                SessionEndedRequestHandler,
+                MagicSpellInitHandler,
+                GetChoicesForSpellHandler
             )
             .addErrorHandlers(
                 ErrorHandler
