@@ -1,0 +1,137 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "starbucks",
+            "intents": [
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "MagicSpellInitIntent",
+                    "slots": [],
+                    "samples": [
+                        "Recommend me a magic spell",
+                        "Recommend me something",
+                        "Suggest me a magic spell",
+                        "Tell me a magic spell",
+                        "Suggest me something"
+                    ]
+                },
+                {
+                    "name": "GetTypeIntent",
+                    "slots": [
+                        {
+                            "name": "drink_type",
+                            "type": "DRINK_TYPE"
+                        }
+                    ],
+                    "samples": [
+                        "something {drink_type}",
+                        "{drink_type}",
+                        "how about {drink_type}",
+                        "make it {drink_type}"
+                    ]
+                },
+                {
+                    "name": "GetPrefIntent",
+                    "slots": [
+                        {
+                            "name": "pref_type",
+                            "type": "PREF_TYPE"
+                        }
+                    ],
+                    "samples": [
+                        "something {pref_type}",
+                        "{pref_type}",
+                        "how about {pref_type}",
+                        "make is {pref_type}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "DRINK_TYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "cold",
+                                "synonyms": [
+                                    "chilled",
+                                    "cool"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "hot",
+                                "synonyms": [
+                                    "burning"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PREF_TYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "mocha",
+                                "synonyms": [
+                                    "tea",
+                                    "green tea",
+                                    "macha"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "vanilla",
+                                "synonyms": [
+                                    "creamy",
+                                    "ice cream",
+                                    "vanilla ice cream"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mango",
+                                "synonyms": [
+                                    "fruity"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "chocolate",
+                                "synonyms": [
+                                    "chocolaty",
+                                    "white choloate",
+                                    "dark chocolate"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
