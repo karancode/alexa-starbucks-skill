@@ -27,10 +27,10 @@
                     "name": "MagicSpellInitIntent",
                     "slots": [],
                     "samples": [
-                        "Recommend me a maigc spell",
+                        "Recommend me a magic spell",
                         "Recommend me something",
                         "Suggest me a magic spell",
-                        "Tell me a maigc spell",
+                        "Tell me a magic spell",
                         "Suggest me something"
                     ]
                 },
