@@ -24,47 +24,78 @@
                     "samples": []
                 },
                 {
-                    "name": "HelloWorldIntent",
-                    "slots": [],
-                    "samples": [
-                        "suggest me something",
-                        "what should i have"
-                    ]
-                },
-                {
                     "name": "MagicSpellInitIntent",
                     "slots": [],
                     "samples": [
-                        "Suggest me a starbuck",
-                        "What Should I have",
-                        "Suggest me something",
-                        "Magic Spell"
+                        "Recommend me a maigc spell",
+                        "Recommend me something",
+                        "Suggest me a magic spell",
+                        "Tell me a maigc spell",
+                        "Suggest me something"
                     ]
                 },
                 {
-                    "name": "GetChoicesForSpellIntent",
+                    "name": "GetTypeIntent",
                     "slots": [
                         {
-                            "name": "choice",
-                            "type": "Choice_SLOT"
+                            "name": "drink_type",
+                            "type": "DRINK_TYPE"
                         }
                     ],
                     "samples": [
-                        "I am craving for {choice}",
-                        "{choice}",
-                        "how about {choice}",
-                        "please make it {choice}"
+                        "something {drink_type}",
+                        "{drink_type}",
+                        "how about {drink_type}",
+                        "make it {drink_type}"
+                    ]
+                },
+                {
+                    "name": "GetPrefIntent",
+                    "slots": [
+                        {
+                            "name": "pref_type",
+                            "type": "PREF_TYPE"
+                        }
+                    ],
+                    "samples": [
+                        "something {pref_type}",
+                        "{pref_type}",
+                        "how about {pref_type}",
+                        "make is {pref_type}"
                     ]
                 }
             ],
             "types": [
                 {
-                    "name": "Choice_SLOT",
+                    "name": "DRINK_TYPE",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "cold",
+                                "synonyms": [
+                                    "chilled",
+                                    "cool"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "hot",
+                                "synonyms": [
+                                    "burning"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "PREF_TYPE",
                     "values": [
                         {
                             "name": {
                                 "value": "mocha",
                                 "synonyms": [
+                                    "tea",
                                     "green tea",
                                     "macha"
                                 ]
@@ -72,14 +103,28 @@
                         },
                         {
                             "name": {
-                                "value": "vanilla"
+                                "value": "vanilla",
+                                "synonyms": [
+                                    "creamy",
+                                    "ice cream",
+                                    "vanilla ice cream"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mango",
+                                "synonyms": [
+                                    "fruity"
+                                ]
                             }
                         },
                         {
                             "name": {
                                 "value": "chocolate",
                                 "synonyms": [
-                                    "white chocolate",
+                                    "chocolaty",
+                                    "white choloate",
                                     "dark chocolate"
                                 ]
                             }
