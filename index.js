@@ -8,7 +8,10 @@ const WELCOME_MESSAGE = 'Welcome to Alexa Starbucks Magic Spell.\
 const HELP_MESSAGE = 'Hello! I am Alexa for Starbucks Magic Spell. \
         I can recommend you some crazy orders known as Starbucks Magic Spells!\
         You inovke by saying... Suggest me something or Tell me a Magic Spell!';
-const GOODBYE_TEXT = 'Have a nice drink. Goodbye!'
+const GOODBYE_MESSAGE = 'Have a nice drink. Goodbye!'
+const MAGICSPELL_INIT_MESSAGE = 'Would you like a Hot or a Cold drink ?';
+const MAGICSPELL_PREF_MESSAGE = 'Would like Chocolate, Mocha, Vanilla or Mango ?';
+
 
 const LauchRequestHandler = {
     canHandle(handlerInput) {
@@ -32,7 +35,7 @@ const MagicSpellInitHandler = {
             || handlerInput.requestEnvelope.request.type === 'AMAZON.StartOverIntent');
     },
     handle(handlerInput) {
-        const speechText = 'Hello. Please tell me what kind of drink are you craving for now? ';
+        const speechText = MAGICSPELL_INIT_MESSAGE;
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -41,24 +44,80 @@ const MagicSpellInitHandler = {
     }
 };
 
-const GetChoicesForSpellHandler = {
+const GetTypeIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.type === 'GetChoicesForSpellIntent';
+        && handlerInput.requestEnvelope.request.type === 'GetTypeIntent';
     },
     handle(handlerInput) {
         const attributes = handlerInput.attributesManager.getSessionAttributes();
-        const choiceSlot = handlerInput.requestEnvelope.request.intent.slots.choice.value;
-        const spell = getSpell(handlerInput, choiceSlot);
+        const drink_type = handlerInput.requestEnvelope.request.slots.drink_type.value;
+        attributes.drink_type = drink_type;
+        handlerInput.attributesManager.setSessionAttributes(attributes);
 
+        const speechText = MAGICSPELL_PREF_MESSAGE;
+        return handlerInput.response
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
     }
+};
 
-}
+const GetPrefIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.type === 'GetPrefIntent';
+    },
+    handler(handlerInput) {
+        //const attributes = handlerInput.attributesManager.getSessionAttributes();
+        const pref_type = handlerInput.requestEnvelope.request.slots.pref_type.value;
+        //attributes.pref_type = pref_type;
+        //handlerInput.attributesManager.setSessionAttributes(attributes);
 
-function getSpell(handlerInput, choiceSlot) {
+        const speechText = getMagicSpell(pref_type, handlerInput);
+        return handlerInput.response
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+
+function getMagicSpell(pref_type, handlerInput) {
     const attributes = handlerInput.attributesManager.getSessionAttributes();
-
-    //if()
+    const spell;
+    switch(pref_type){
+        case 'chocolate':
+            if(attributes.drink_type === 'cold'){
+                spell = 'Cold Chocolate Maigc Spell!';
+            }else if(attributes.drink_type === 'hot'){
+                spell = 'Hot Chocolate Maigc Spell!';
+            }
+            break;
+        case 'vanilla':
+        if(attributes.drink_type === 'cold'){
+            spell = 'Cold Vanilla Maigc Spell!';
+        }else if(attributes.drink_type === 'hot'){
+            spell = 'Hot Vaniila Maigc Spell!';
+        }
+            break;
+        case 'mango':
+            if(attributes.drink_type === 'cold'){
+                spell = 'Cold Mango Maigc Spell!';
+            }else if(attributes.drink_type === 'hot'){
+                spell = 'Hot Mango Maigc Spell!';
+            }
+            break;
+        case 'mocha':
+            if(attributes.drink_type === 'cold'){
+                spell = 'Cold Mocha Maigc Spell!';
+            }else if(attributes.drink_type === 'hot'){
+                spell = 'Hot Mocha Maigc Spell!';
+            }
+            break;
+        default:
+            //return some random spell.
+    }
+    return spell;
 }
 
 const HelpIntentHandler = {
@@ -83,7 +142,7 @@ const CancelAndStopIntentHandler = {
             || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speechText = GOODBYE_TEXT;
+        const speechText = GOODBYE_MESSAGE;
 
         return handlerInput.responseBuilder
             .speak(speechText)
@@ -116,20 +175,6 @@ const ErrorHandler = {
 };
 
 
-// constants
-const magicSpells = [
-    'Order One',
-    'Order Two',
-    'Order Three',
-    'Order Four',
-    'Order Five'
-];
-
-function getRandom(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-}
-
-
 let skill;
 
 exports.handler = async function (event, context) {
@@ -143,7 +188,8 @@ exports.handler = async function (event, context) {
                 CancelAndStopIntentHandler,
                 SessionEndedRequestHandler,
                 MagicSpellInitHandler,
-                GetChoicesForSpellHandler
+                GetTypeIntentHandler,
+                GetPrefIntentHandler,
             )
             .addErrorHandlers(
                 ErrorHandler
