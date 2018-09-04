@@ -84,7 +84,7 @@ const GetPrefIntentHandler = {
 
 function getMagicSpell(pref_type, handlerInput) {
     const attributes = handlerInput.attributesManager.getSessionAttributes();
-    const spell;
+    var spell;
     switch(pref_type){
         case 'chocolate':
             if(attributes.drink_type === 'cold'){
