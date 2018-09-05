@@ -1,8 +1,8 @@
 module.exports = {
 
     ANYTHING : {
-        DRINK_TYPE : ['cold', 'hot'],
-        PREF_TYPE : ['chocolate', 'vanilla', 'mango', 'mocha']
+        DRINK_TYPE : ['COLD', 'HOT'],
+        PREF_TYPE : ['CHOCOLATE', 'VANILLA', 'MANGO', 'MOCHA']
     },
     COLD: {
         CHOCOLATE: [
