@@ -44,6 +44,23 @@ const MagicSpellInitHandler = {
     }
 };
 
+const GetAnythingIntentHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'GetAnythingIntent';
+    },
+    handle(handlerInput) {
+        const drink_type = Spell.ANYTHING.DRINK_TYPE[getRandom(Spell.ANYTHING.DRINK_TYPE.length)];
+        const pref_type = Spell.ANYTHING.PREF_TYPE[getRandom(Spell.ANYTHING.PREF_TYPE.length)];
+
+        const speechText = Spell.drink_type.pref_type[getRandom(Spell.drink_type.pref_type.length)];
+        return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .getResponse();
+    }
+};
+
 const GetTypeIntentHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'IntentRequest'
@@ -194,6 +211,7 @@ exports.handler = async function (event, context) {
                 MagicSpellInitHandler,
                 GetTypeIntentHandler,
                 GetPrefIntentHandler,
+                GetAnythingIntentHandler,
             )
             .addErrorHandlers(
                 ErrorHandler
