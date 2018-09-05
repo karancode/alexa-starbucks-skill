@@ -1,10 +1,10 @@
 //index.js
 const Alexa = require('ask-sdk-core');
+const Spell = require('./spells');
 
 // constants
 const WELCOME_MESSAGE = 'Welcome to Alexa Starbucks Magic Spell.\
-        I can suggest some crazy starbucks magic spells!\
-        You can ask me for some Magic Spell!';
+        I can suggest some crazy starbucks magic spells!';
 const HELP_MESSAGE = 'Hello! I am Alexa for Starbucks Magic Spell. \
         I can recommend you some crazy orders known as Starbucks Magic Spells!\
         You inovke by saying... Suggest me something or Tell me a Magic Spell!';
@@ -88,36 +88,40 @@ function getMagicSpell(pref_type, handlerInput) {
     switch(pref_type){
         case 'chocolate':
             if(attributes.drink_type === 'cold'){
-                spell = 'Cold Chocolate Maigc Spell!';
+                spell = Spell.COLD.CHOCOLATE[getRandom(Spell.COLD.CHOCOLATE.length)];
             }else if(attributes.drink_type === 'hot'){
-                spell = 'Hot Chocolate Maigc Spell!';
+                spell = Spell.HOT.CHOCOLATE[getRandom(Spell.HOT.CHOCOLATE.length)];
             }
             break;
         case 'vanilla':
         if(attributes.drink_type === 'cold'){
-            spell = 'Cold Vanilla Maigc Spell!';
+            spell = Spell.COLD.VANILLA[getRandom(Spell.COLD.VANILLA.lenght)];
         }else if(attributes.drink_type === 'hot'){
-            spell = 'Hot Vaniila Maigc Spell!';
+            spell = Spell.HOT.VANILLA[getRandom(Spell.HOT.VANILLA.lenght)];
         }
             break;
         case 'mango':
             if(attributes.drink_type === 'cold'){
-                spell = 'Cold Mango Maigc Spell!';
+                spell = Spell.COLD.MANGO[getRandom(Spell.COLD.MANGO.length)];
             }else if(attributes.drink_type === 'hot'){
-                spell = 'Hot Mango Maigc Spell!';
+                spell = Spell.HOT.MANGO[getRandom(Spell.HOT.MANGO.length)];
             }
             break;
         case 'mocha':
             if(attributes.drink_type === 'cold'){
-                spell = 'Cold Mocha Maigc Spell!';
+                spell = Spell.COLD.MOCHA[getRandom(Spell.COLD.MOCHA.length)];
             }else if(attributes.drink_type === 'hot'){
-                spell = 'Hot Mocha Maigc Spell!';
+                spell = Spell.HOT.MOCHA[getRandom(Spell.HOT.MOCHA.length)];
             }
             break;
         default:
-            //return some random spell.
+            //return random/special spell.
     }
     return spell;
+}
+
+function getRandom(){
+    return 0;
 }
 
 const HelpIntentHandler = {
