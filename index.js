@@ -95,9 +95,9 @@ function getMagicSpell(pref_type, handlerInput) {
             break;
         case 'vanilla':
         if(attributes.drink_type === 'cold'){
-            spell = Spell.COLD.VANILLA[getRandom(Spell.COLD.VANILLA.lenght)];
+            spell = Spell.COLD.VANILLA[getRandom(Spell.COLD.VANILLA.length)];
         }else if(attributes.drink_type === 'hot'){
-            spell = Spell.HOT.VANILLA[getRandom(Spell.HOT.VANILLA.lenght)];
+            spell = Spell.HOT.VANILLA[getRandom(Spell.HOT.VANILLA.length)];
         }
             break;
         case 'mango':
