@@ -1,5 +1,9 @@
 module.exports = {
 
+    ANYTHING : {
+        DRINK_TYPE : ['cold', 'hot'],
+        PREF_TYPE : ['chocolate', 'vanilla', 'mango', 'mocha']
+    },
     COLD: {
         CHOCOLATE: [
             'A venti coffee frappucino with two scoops of ice, five pumps of frap roast, and double blended.',//bad
