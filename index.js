@@ -120,8 +120,8 @@ function getMagicSpell(pref_type, handlerInput) {
     return spell;
 }
 
-function getRandom(){
-    return 0;
+function getRandom(max){
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
 const HelpIntentHandler = {
