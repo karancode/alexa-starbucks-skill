@@ -63,6 +63,15 @@
                         "how about {pref_type}",
                         "make is {pref_type}"
                     ]
+                },
+                {
+                    "name": "GetAnythingIntent",
+                    "slots": [],
+                    "samples": [
+                        "your choice",
+                        "anything is fine",
+                        "anything"
+                    ]
                 }
             ],
             "types": [
