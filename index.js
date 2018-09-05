@@ -53,13 +53,48 @@ const GetAnythingIntentHandler = {
         const drink_type = Spell.ANYTHING.DRINK_TYPE[getRandom(Spell.ANYTHING.DRINK_TYPE.length)];
         const pref_type = Spell.ANYTHING.PREF_TYPE[getRandom(Spell.ANYTHING.PREF_TYPE.length)];
 
-        const speechText = Spell.drink_type.pref_type[getRandom(Spell.drink_type.pref_type.length)];
+        const speechText = getAnySpell(drink_type, pref_type);
         return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
             .getResponse();
     }
 };
+
+function getAnySpell(drink_type, pref_type) {
+    var spell;
+    switch (pref_type) {
+        case 'CHOCOLATE':
+            if (drink_type === 'HOT') {
+                spell = Spell.HOT.CHOCOLATE[getRandom(Spell.HOT.CHOCOLATE.length)];
+            } else {
+                spell = Spell.COLD.CHOCOLATE[getRandom(Spell.COLD.CHOCOLATE.length)];
+            }
+            break;
+        case 'VANILLA':
+            if (drink_type === 'HOT') {
+                spell = Spell.HOT.VANILLA[getRandom(Spell.HOT.VANILLA.length)];
+            } else {
+                spell = Spell.COLD.VANILLA[getRandom(Spell.COLD.VANILLA.length)];
+            }
+            break;
+        case 'MANGO':
+            if (drink_type === 'HOT') {
+                spell = Spell.HOT.MANGO[getRandom(Spell.HOT.MANGO.length)];
+            } else {
+                spell = Spell.COLD.MANGO[getRandom(Spell.COLD.MANGO.length)];
+            }
+            break;
+        case 'MOCHA':
+            if (drink_type === 'HOT') {
+                spell = Spell.HOT.MOCHA[getRandom(Spell.HOT.MOCHA.length)];
+            } else {
+                spell = Spell.COLD.MOCHA[getRandom(Spell.COLD.MOCHA.length)];
+            }
+            break;
+    }
+    return spell;
+}
 
 const GetTypeIntentHandler = {
     canHandle(handlerInput) {
